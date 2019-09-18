@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body></body>
+
+<script src="shader_tool.js"></script>
+
+<script type="vertex-shader" id="vertexShaderSourceRaw">
+  attribute vec4 a_position;
+  void() {
+    gl_Position = a_position;
+  }
+</script>
+<script type="fragment-shader" id="fragmentShaderSourceRaw">
+  void() {
+    gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
+  }
+</script>
+
+<script>
+  // create canvas the way ide keep track
+  const ct = document.createElement("canvas")
+  document.body.appendChild(ct)
+  const gl = ct.getContext("webgl")
+
+  // basic program init
+  const program = gl.createProgram()
+
+  const vertexShaderSource = gl.shaderSource(vertexShaderSourceRaw)
+  const vertexShader = gl.createShader(gl.VERTEX_SHADER)
+  const cVertexShader = gl.compileShader(vertexShaderSource)
+
+  gl.attachShader(program, vertexShader)
+
+  const fragmentShaderSource = gl.shaderSource(fragmentShaderSourceRaw)
+  const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)
+  const cFragmentShader = gl.compileShader(fragmentShaderSource)
+
+  gl.attachShader(program, fragmentShader)
+
+  gl.linkProgram(program)
+  gl.useProgram(program)
+
+
+
+</script>
